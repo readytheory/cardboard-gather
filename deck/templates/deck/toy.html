@@ -1,0 +1,8 @@
+<form method="post" novalidate>
+  {% csrf_token %}
+  {% for field in form.wrong_answers %}
+  <input name='x' type='text'>
+  {% endfor %}
+  <p>Variable is {{ crs }}</p>
+  {{if type="submit">Submit</button>
+</form>

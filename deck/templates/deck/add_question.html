@@ -1,0 +1,11 @@
+<h1>You are adding a question</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'deck:question_add' %}" method="post">
+ {% csrf_token %}
+
+ <input type="text" name="question" id="question" value="your question">
+
+<input type="submit" value="Add it">
+</form>

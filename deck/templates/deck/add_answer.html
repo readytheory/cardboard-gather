@@ -1,0 +1,18 @@
+<form action ="{ url 'deck:question_add_answer'}" method="post" >
+  {% csrf_token %}
+  <P>Enter the right answer and a few wrong answers
+  <P>The question is <bold> {{ question_text }} </bold>
+  {{ form }}
+  <P>This is where the right answer goes.
+    <input type='text' name='right_answer'>
+  </P>
+  <P>This is for the wrong answers.  These are used to form multiple choice question.  Reasonable answers are best</P>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+
+
+  </ul>
+<input type="submit" value="Add it">
+</form>
