@@ -2,12 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
-
-
-# Create your views here.
-
 from .models import Card
-
+from .models import WrongAnswer, RightAnswer
 from .forms import NewQuestionForm, AddAnswerForm
 
 
@@ -35,11 +31,6 @@ def question_add(request):
         return render(request, 'deck/add_question.html', {'form': form})
 
 def question_add_answer(request, question_id =0) :
-    from .models import Card
-    from .forms import AddAnswerForm
-    from .models import WrongAnswer
-    from .models import RightAnswer
-
     
     if request.method == 'POST' :
         aaf = AddAnswerForm(request.POST)
@@ -59,7 +50,6 @@ def question_add_answer(request, question_id =0) :
             except Exception as e:
                 return(HttpResponse( "failed trying to save right answer, {}".format(e)))
              
-                
             wrongs =[]
             for i in range(1,7) :
                 wrong = aaf.cleaned_data['wrong' + str(i)]
@@ -75,7 +65,7 @@ def question_add_answer(request, question_id =0) :
                         
                 
         else:
-            print("aaf not vali")
+            print("aaf not valid")
         return(HttpResponse("see the printout"))
 
     if(question_id == 0) :
@@ -88,6 +78,9 @@ def question_add_answer(request, question_id =0) :
     question_text = c.question_text
     return render(request, 'deck/add_answer.html', {'question_text': question_text,
                                                     'question_id': question_id})
+
+def baby_quiz(request):
+    return HttpResponse("You are at the baby quiz")
     
 
 
