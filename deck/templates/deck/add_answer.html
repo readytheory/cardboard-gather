@@ -1,16 +1,26 @@
-<form action ="{ url 'deck:question_add_answer'}" method="post" >
+<form action ="{% url 'deck:question_add_answer_post' %}" method="post" >
   {% csrf_token %}
+  <input type=hidden name=question_id value="{{ question_id }}">
   <P>Enter the right answer and a few wrong answers
   <P>The question is <bold> {{ question_text }} </bold>
-  {{ form }}
-  <P>This is where the right answer goes.
+  <P><label for='right_answer'>Correct answer:</label>
     <input type='text' name='right_answer'>
   </P>
-  <P>This is for the wrong answers.  These are used to form multiple choice question.  Reasonable answers are best</P>
-  <ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
+  <P>Below, enter a selecton of wrong answers.  These are used to form
+  multiple choice question.  Reasonable answers are best. When
+  displayed, the right answer and some randomly-selected wrong answers
+    will be chosen, in random order.</P>
+  <P>You can leave some blank, and you can add more later</P>
+  <label for='wrong_answer_list'>Incorrect Answers:</label>
+  <ul id='wrong_answer_list' class='questionlist'>
+    <li>  <input type=text name='wrong1'></li>
+    <li> <input type=text name='wrong2'> </li>
+    <li>  <input type=text name='wrong3'></li>
+    <li> <input type=text name='wrong4'> </li>
+    <li> <input type=text name='wrong5'></li>
+    <li> <input type=text name='wrong6'></li>
+    <ul>
+
 
 
   </ul>
