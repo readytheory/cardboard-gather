@@ -3,8 +3,9 @@
 site_settings.ini
 settings.ini
 .env
-# for temporary
-settings.py
+nuance.env
+scuba.env
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
