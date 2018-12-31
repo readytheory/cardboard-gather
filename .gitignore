@@ -6,6 +6,10 @@ settings.ini
 nuance.env
 scuba.env
 
+
+# collected static files
+collectedstatic/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
