@@ -7,7 +7,7 @@
 
 <form action="{% url 'deck:question_add' %}" method="post">
  {% csrf_token %}
-
+ {% if thanks_message %}<p><strong>{{ thanks_message }}</strong></p>{% endif %}
  <input type="text" name="question" id="question" value="your question">
  
 <input type="submit" value="Add it">

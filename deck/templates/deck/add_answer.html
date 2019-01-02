@@ -1,3 +1,5 @@
+{% extends 'deck/base.html' %}
+{% block content %}
 <form action ="{% url 'deck:question_add_answer_post' %}" method="post" >
   {% csrf_token %}
   <input type=hidden name=question_id value="{{ question_id }}">
@@ -20,9 +22,7 @@
     <li> <input type=text name='wrong5'></li>
     <li> <input type=text name='wrong6'></li>
     <ul>
-
-
-
   </ul>
 <input type="submit" value="Add it">
 </form>
+{% endblock %}

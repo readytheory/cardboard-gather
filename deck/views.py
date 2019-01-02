@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from .models import Card
 from .models import WrongAnswer, RightAnswer
 from .forms import NewQuestionForm, AddAnswerForm
-
+from .deck_util import login_string
 
 def not_implemented(request) :
     return HttpResponse("That isn't ready yet")
@@ -13,7 +13,7 @@ def not_implemented(request) :
 def index(request):
     return HttpResponse("Time to learn things!")
 
-def question_add(request):
+def question_add(request, just_added = 0):
     if request.method == 'POST' :
         form = NewQuestionForm(request.POST)
         if form.is_valid():
@@ -28,14 +28,20 @@ def question_add(request):
                 return HttpResponseRedirect("/error")
     else:
         form = NewQuestionForm()
-        return render(request, 'deck/add_question.html', {'form': form})
+        stat = login_string(request)
+        tym = ''
+        if int(just_added) > 0:
+            tym = 'Thank you for adding that!... You can add another below'
+        return render(request, 'deck/add_question.html', {'form': form, 
+                                                          'login_stat': stat,
+                                                          'thanks_message': tym,})
+
 
 def question_add_answer(request, question_id =0) :
     
     if request.method == 'POST' :
         aaf = AddAnswerForm(request.POST)
         if aaf.is_valid():
-            print ("aaf is valid")
             question_id = aaf.cleaned_data['question_id']
             try:
                 parentCard = Card.objects.get(id=question_id)
@@ -48,7 +54,7 @@ def question_add_answer(request, question_id =0) :
             try:
                 right_ans.save()
             except Exception as e:
-                return(HttpResponse( "failed trying to save right answer, {}".format(e)))
+                return HttpResponse( "failed trying to save right answer, {}".format(e))
              
             wrongs =[]
             for i in range(1,7) :
@@ -61,13 +67,11 @@ def question_add_answer(request, question_id =0) :
                         wrong_ans.save()
                     except:
                         return(HttpResponse("Error saving wrong answer to database"))
-            
-                        
-                
+            print ("calling redirect")
+            return redirect('deck:question_add_another', just_added=1)
         else:
             print("aaf not valid")
-        return(HttpResponse("see the printout"))
-
+            
     if(question_id == 0) :
         return HttpResponse("no question id?  Really?")
     try:
@@ -76,8 +80,10 @@ def question_add_answer(request, question_id =0) :
         return HttpResponse("error loading card")
     
     question_text = c.question_text
+    stat= login_string(request)
     return render(request, 'deck/add_answer.html', {'question_text': question_text,
-                                                    'question_id': question_id})
+                                                    'question_id': question_id,
+                                                    'login_stat': stat})
 
 def baby_quiz(request):
     return HttpResponse("You are at the baby quiz")
