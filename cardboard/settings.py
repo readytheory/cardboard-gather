@@ -32,9 +32,12 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = decouple_config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = decouple_config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = decouple_config('SOCIAL_AUTH_LOGIN_REDIRECT_URL')
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL  = decouple_config('SOCIAL_AUTH_LOGIN_REDIRECT_URL')
 LOGIN_URL = '/auth/login/google-oauth2/'
 
-LOGIN_REDIRECT_URL = 'https://nuance.readytheory.com/oauth2_welcome'
+
 LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
@@ -48,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +77,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # per https://hashedin.com/blog/a-guide-to-using-social-login-with-django/
+                'social_django.context_processors.backends', 
+                'social_django.context_processors.login_redirect', 
             ],
         },
     },
