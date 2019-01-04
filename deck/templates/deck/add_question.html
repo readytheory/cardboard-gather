@@ -12,11 +12,21 @@
  
 <input type="submit" value="Add it">
 </form>
+<div class="nav-bar"></div>
+  
 <div id = "app">
-{% verbatim %}
-<h3>{{ product }}</h3>
-  {% endverbatim %}
-  <script src="{% static 'js/main.js' %}"></script>
-
+  <div class="product">
+    <div class="product-image">
+      <img v-bind:src="image" >
+      <P>You can see a web page with <a :href="image_url"> cool one here</a>
+    </div>
+    <div class="product-info">
+      {% verbatim %}
+      <h3>{{ product }}</h3>
+      <h4>{{ description }}</h4>
+      {% endverbatim %}
+    </div>
+    <script src="{% static 'js/main.js' %}"></script>
+  </div>
 </div>
 {% endblock %}
