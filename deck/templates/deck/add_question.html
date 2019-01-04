@@ -1,5 +1,5 @@
 {% extends 'deck/base.html' %}
-
+{% load static %}
 {% block content %}
 <h1>You are adding a question</h1>
 
@@ -12,4 +12,11 @@
  
 <input type="submit" value="Add it">
 </form>
+<div id = "app">
+{% verbatim %}
+<h3>{{ product }}</h3>
+  {% endverbatim %}
+  <script src="{% static 'js/main.js' %}"></script>
+
+</div>
 {% endblock %}

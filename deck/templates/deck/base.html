@@ -2,19 +2,15 @@
 <html>
     <head>
       <title>dEck</title>
-      <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>    </head>
+      <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
     <body>
         <div class="page-header">
           <P>{{ login_stat }}</P>
 	  <hr>
         </div>
         <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                    {% block content %}
-                    {% endblock %}
-                </div>
-            </div>
+	  {% block content %}{% endblock %}
         </div>
     </body>
 </html>
