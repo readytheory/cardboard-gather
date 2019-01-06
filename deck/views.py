@@ -42,12 +42,14 @@ def question_add_answer(request, question_id =0) :
     if request.method == 'POST' :
         aaf = AddAnswerForm(request.POST)
         if aaf.is_valid():
+            print("Here is request {}".format(request))
+           
             question_id = aaf.cleaned_data['question_id']
             try:
                 parentCard = Card.objects.get(id=question_id)
             except:
                 return(HttpResponse("Error getting parent card {}".format(question_id)))
-            r = aaf.cleaned_data['right_answer']
+            r = aaf.cleaned_data['right_answer_text']
             right_ans = RightAnswer()
             right_ans.question = parentCard
             right_ans.right_answer_text = r
@@ -71,6 +73,7 @@ def question_add_answer(request, question_id =0) :
             return redirect('deck:question_add_another', just_added=1)
         else:
             print("aaf not valid")
+            print("here is the no-god form {}".format(request))
             
     if(question_id == 0) :
         return HttpResponse("no question id?  Really?")

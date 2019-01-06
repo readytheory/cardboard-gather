@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -12,6 +13,17 @@ class Card(models.Model):
     usable = models.BooleanField(default = True)
     """ An question can be turned off, not available for selection,
 by setting this field to true"""
+
+
+class CardAuthor(models.Model) :
+    card = models.ForeignKey(
+        Card,
+        on_delete=models.CASCADE)
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE)
+    
+
 
 class WrongAnswer(models.Model):
     

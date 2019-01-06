@@ -4,7 +4,7 @@ class NewQuestionForm(forms.Form):
     question = forms.CharField(label = "Question", max_length=200)
 
 class AddAnswerForm(forms.Form):
-    right_answer = forms.CharField(initial="Correct Answer")
+    right_answer_text = forms.CharField(initial="Correct Answer")
     wrong1 = forms.CharField(required=True)
     wrong2 = forms.CharField(required=False)
     wrong3 = forms.CharField(required=False)
