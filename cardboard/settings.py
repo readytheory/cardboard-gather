@@ -131,7 +131,30 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
-
 STATIC_ROOT = decouple_config('STATIC_ROOT')
 STATIC_URL = decouple_config('STATIC_URL')
+
+
+
+# LOGGING_LEVEL = decouple_config('LOGGING_LEVEL')
+# LOGGING_FILENAME = decouple_config('LOGGING_FILENAME')
+
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': LOGGING_LEVEL,
+#             'class': 'logging.FileHandler',
+#             'filename': LOGGING_FILENAME,
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': LOGGING_LEVEL,
+#             'propagate': True,
+#         },
+#     },
+# }
