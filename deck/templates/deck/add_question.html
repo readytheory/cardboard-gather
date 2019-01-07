@@ -9,7 +9,14 @@
  {% csrf_token %}
  {% if thanks_message %}<p><strong>{{ thanks_message }}</strong></p>{% endif %}
  <input type="text" name="question" id="question" value="your question">
- 
 <input type="submit" value="Add it">
 </form>
+<br>
+{% if your_cards %}
+<p>Your recent questions</p>
+<ul>{% for record in your_cards %}
+<li>{{record.display_text}}</li>
+{% endfor %}
+</ul>
+{% endif %}
 {% endblock %}

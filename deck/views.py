@@ -30,21 +30,26 @@ def question_add(request, just_added = ''):
             logger.info("Calling persist_question")
             new_q_id = U.persist_question(request, logger)
             return HttpResponseRedirect(reverse('deck:question_add_answer_get', args=[new_q_id]))
+        else:
+            return HttpResponse("Error validating your question, try again")
 
 
     else:
         form = NewQuestionForm()
         stat = U.login_string(request)
         tym = ''
+        user_cards = None
         if just_added == 'thanks':
             tym = 'Thank you for adding that!... You can add another below'
             if request.user.is_authenticated:
                 user_cards = U.cards_by_user(request.user)
             else:
-                tym += "<P>Since you aren't logged in, your card went to the open library"
+                tym += "  Since you aren't logged in, your card went immediately to published status."
+  
         return render(request, 'deck/add_question.html', {'form': form, 
                                                           'login_stat': stat,
-                                                          'thanks_message': tym,})
+                                                          'thanks_message': tym,
+                                                          'your_cards': user_cards})
 
 
 

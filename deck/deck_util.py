@@ -35,5 +35,8 @@ def persist_question(request, logger) :
     
 def cards_by_user(user, count=10) :
     '''Return a queryset of Card object made by a user'''
-    return Card.objects.all()[:count]
+    authored_cards = Card.objects.filter(cardauthor__author=user).order_by('-id')
+    return authored_cards
+
+    
 

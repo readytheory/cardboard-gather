@@ -8,9 +8,17 @@ class Card(models.Model):
     def __str__(self) :
         return "Card: ".format( self.question_text)
 
-
     question_text = models.CharField(max_length=200);
     usable = models.BooleanField(default = True)
+
+    display_len = 45
+
+    def display_text(self) :
+        if len(self.question_text) > self.display_len - 2 :
+            return self.question_text[:self.display_len] + '...'
+        else :
+            return self.question_text
+    
     """ An question can be turned off, not available for selection,
 by setting this field to true"""
 
@@ -22,6 +30,7 @@ class CardAuthor(models.Model) :
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE)
+    
     
 
 
