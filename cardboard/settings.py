@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'authentication',
+    'quizmaker',
 ]
 
 MIDDLEWARE = [
