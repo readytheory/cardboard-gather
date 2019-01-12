@@ -11,9 +11,7 @@ import logging
 
 logger = logging.getLogger('django')
 
-
 import bleach
-
 
 
 def not_implemented(request) :
