@@ -1,6 +1,8 @@
 from django.test import TestCase, RequestFactory
 from django.test import Client
 from django_webtest import WebTest
+from django.urls import reverse
+
 
 import bleach
 
@@ -36,7 +38,7 @@ class CreateQuiz(TestCase):
         c  = Client()
         quizdata = {'quizname' : 'bellyitcher_stub' }
         #        import pdb; pdb.set_trace()
-        response = c.post("/quizmaker/create/", quizdata, follow=True)
+        response = c.post(reverse('quizmaker:quiz_create_from_form_data'), quizdata, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.redirect_chain),1)
         
@@ -52,9 +54,18 @@ class CreateQuiz(TestCase):
         quizdata = {'quizname' : quizname }
         matches = Quiz.objects.filter(name = quizname)
         self.assertEqual(len(matches), 0)
-        response = self.client.post("/quizmaker/create/", quizdata, follow=True)
+        response = self.client.post(reverse('quizmaker:quiz_create_from_form_data'),
+                                    quizdata, follow=True)
         self.assertEqual(response.status_code, 200)
         matches = Quiz.objects.filter(name = quizname)
-#        import pdb; pdb.set_trace()
         self.assertEqual(len(matches), 1)
 
+    def test_new_quiz_shows_quiz_name(self) :
+        quizname  = bleach.clean('ufr osop ois h2')
+        matches = Quiz.objects.filter(name = quizname)
+        self.assertEqual(len(matches), 0)
+        quizdata = {'quizname' : quizname }
+        response = self.client.post(reverse('quizmaker:quiz_create_from_form_data'),
+                                    quizdata, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(bytes("Quiz name: {}".format(quizname), 'utf-8') in response.content)
