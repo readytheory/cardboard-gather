@@ -13,5 +13,5 @@ def not_implemented(request) :
     return HttpResponse("That isn't ready yet")
 
 def create_interactive(request):
-    return HttpResponse("You create quizzes here")
+    return render(request, 'quizmaker/newquiz.html', {})
 

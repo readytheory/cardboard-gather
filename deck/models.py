@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Card(models.Model):
 
     def __str__(self) :
-        return "Card: ".format( self.question_text)
+        return "Card: {}".format( self.question_text)
 
     question_text = models.CharField(max_length=200);
     usable = models.BooleanField(default = True)

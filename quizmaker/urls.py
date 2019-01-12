@@ -6,7 +6,7 @@ from . import views
 app_name = "quizmaker"
 
 urlpatterns = [
-    re_path('^create/$', views.create_interactive, name='quiz_create_interactive'),
+    re_path('^create/$', views.create_interactive, name='quiz_create_from_form_data'),
 ]
 
 

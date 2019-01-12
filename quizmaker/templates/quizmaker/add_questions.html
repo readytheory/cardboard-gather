@@ -1,0 +1,9 @@
+{% block content %}
+<h1>Adding questions to quiz</h1>
+
+<form action="{% url 'quizmaker:add_questions_to_quiz %}" method="post">
+ {% csrf_token %}
+ <input type="submit" value="Add These">
+</form>
+<br>
+{% endblock %}

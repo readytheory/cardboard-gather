@@ -1,6 +1,5 @@
 from .models import Card
 from .models import WrongAnswer, RightAnswer, CardAuthor
-from .forms import NewQuestionForm, AddAnswerForm
 
 import bleach
 

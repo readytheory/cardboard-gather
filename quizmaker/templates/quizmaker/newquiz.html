@@ -1,0 +1,10 @@
+{% block content %}
+<h1>You are creating a quiz, hon</h1>
+
+<form action="{% url 'quizmaker:quiz_create_from_form_data' %}" method="post">
+ {% csrf_token %}
+ <input type="text" name="quizname" id="quizname" value="quiz name">
+ <input type="submit" value="Add it">
+</form>
+<br>
+{% endblock %}
