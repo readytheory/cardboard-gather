@@ -9,6 +9,7 @@ import bleach
 from .forms import NewQuizForm
 from .views import create_interactive
 from .models import Quiz
+from deck.models import Card
 
 class CreateQuiz(TestCase):
 
@@ -73,7 +74,7 @@ class CreateQuiz(TestCase):
 
     def test_quiz_add_cards_template_shows_cards(self) :
         '''Bypassing the normal workflow and hitting the template directly
-with known values, make sure the echoes the questions back.'''
+with known values, make sure the template echoes the questions back.'''
         cards = [self.card1, self.card2]
         quizdata = {'quizname' : 'uho mcuhoface',
                     'cards' : cards }
@@ -81,6 +82,36 @@ with known values, make sure the echoes the questions back.'''
         response = render(req, 'quizmaker/add_cards_to_quiz.html' , quizdata)
         for card in cards :
             self.assertTrue(bytes(card['question_text'], 'utf-8') in response.content)
+
+    def test_new_quiz_has_cards(self) :
+        '''
+        Confirm that when the normal mechanism creates a quiz
+        there are some cards there.  we don't know exactly what
+        questions.  Different from last test in that we're just
+        confirming normal quiz creation populates the resulting form
+        '''
+        quizname  = bleach.clean('ufr osop ois h3')
+        quizdata = {'quizname' : quizname }
+        c1 = Card()
+        c1.question_text = 'Sample Card for test db'
+        c1.save()
+        response = self.client.post(reverse('quizmaker:quiz_create_from_form_data'),
+                                    quizdata, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(
+            bytes('class="candidate"', 'utf-8') in response.content
+        )
+                    
+        
+
+        
+        
+        
+        
+
+            
+
+            
 
         
         

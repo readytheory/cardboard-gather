@@ -1,10 +1,13 @@
 {% block content %}
-<h1>Adding questions to quiz</h1>
+<h1>Adding Cards to quiz</h1>
 <h2>Quiz name: {{ quiz_name }}
+  Now, you can choose questions.  Below are recent ones, click on
+  any you want to be in your quiz.
+  <h3>Recent questions
   {% for card in cards %}
-  <label class="cards" id="card" + {{card.id}} > {{card.question_text}}
+  <label class="candidate" id="card{{card.id}}" > {{card.question_text}}
   <input type="checkbox" checked="checked">
-  <span class="checkmark"></span>
+  <span class="candidate"></span>
   </label>
   {% endfor %}
 <br>

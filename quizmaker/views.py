@@ -4,6 +4,8 @@ from django.urls import reverse
 
 from .models import Quiz
 
+from deck.models  import Card
+
 import logging
 
 import bleach
@@ -32,8 +34,16 @@ def create_interactive(request):
         return render(request, 'quizmaker/newquiz.html', {})
         
 def add_cards_to_quiz_form(request, quiz_id) :
+    quizdata = {}
     try:
         quizname = Quiz.objects.get(id=quiz_id).name
     except:
         return HttpResponse("Can't get quiz name for id {}".format(quiz_id))
-    return render(request, 'quizmaker/add_cards_to_quiz.html', { 'quiz_name' : quizname })
+    quizdata['quiz_name'] = quizname
+    recents = Card.objects.all().order_by('-id')[:50]
+    cards = []
+    for card in recents:
+        cards.append({'id': card.id, 'question_text': card.question_text})
+    quizdata['cards'] = cards
+    return render(request, 'quizmaker/add_cards_to_quiz.html', quizdata)
+
