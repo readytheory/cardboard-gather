@@ -1,6 +1,11 @@
 {% block content %}
 <h1>Adding questions to quiz</h1>
 <h2>Quiz name: {{ quiz_name }}
-  
+  {% for card in cards %}
+  <label class="cards" id="card" + {{card.id}} > {{card.question_text}}
+  <input type="checkbox" checked="checked">
+  <span class="checkmark"></span>
+  </label>
+  {% endfor %}
 <br>
 {% endblock %}

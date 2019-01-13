@@ -37,13 +37,3 @@ def add_cards_to_quiz_form(request, quiz_id) :
     except:
         return HttpResponse("Can't get quiz name for id {}".format(quiz_id))
     return render(request, 'quizmaker/add_cards_to_quiz.html', { 'quiz_name' : quizname })
-
-    
-                      
-    
-                                    
-                                    
-                                    
-     
-
-
