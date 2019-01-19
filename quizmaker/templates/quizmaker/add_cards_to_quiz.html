@@ -1,14 +1,25 @@
+{% extends "quizmaker/base.html" %}
+
 {% block content %}
 <h1>Adding Cards to quiz</h1>
 <h2>Quiz name: {{ quiz_name }}
   Now, you can choose questions.  Below are recent ones, click on
-  any you want to be in your quiz.
+  any you want to be in your quiz.  You can also add cards by 
   <h3>Recent questions
-  {% for card in cards %}
-  <label class="candidate" id="card{{card.id}}" > {{card.question_text}}
-  <input type="checkbox" checked="checked">
-  <span class="candidate"></span>
-  </label>
-  {% endfor %}
+    <div id='card_design_grid' >
+      <div id='selectable_cardpool'>
+	{% for card in cards %}
+	<div class="candidate_row">
+	  <label class="candidate" id="card{{card.id}}" for="checkbox{{card.id}}"> {{card.question_text}}  </label>
+	  <input id="checkbox{{card.id}}" type="checkbox" >
+	</div>
+	{% endfor %}
+      </div>
+      <div id="selection_changers">
+	<input type="button" id="choose_by_tag">Tags...</input>
+	<input type="button" id="choose_by_text">matching text...</input>
+      </div>
+    </div>
+
 <br>
 {% endblock %}

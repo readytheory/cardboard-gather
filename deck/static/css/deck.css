@@ -17,5 +17,23 @@ h1 {
 /* Applies to all elements with <... class="someclass"> specified. */
 .someclass { color: red; }
 
+
+#card_design_grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 50% 1fr;
+}
+
 /* Applies to the element with <... id="someid"> specified. */
 #someid { color: green; }
+
+.candidate_row {
+    border-top: dotted 1px black;
+}
+.candidate_row:nth-child(odd) {
+    background-color: #FFEEFF;
+}
+
+.candidate_row:nth-child(even) {
+  background-color: #DDEEFF;
+}

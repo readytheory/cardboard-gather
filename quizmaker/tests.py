@@ -1,6 +1,5 @@
 from django.test import TestCase, RequestFactory
 from django.test import Client
-from django_webtest import WebTest
 from django.urls import reverse
 from django.shortcuts import render
 

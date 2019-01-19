@@ -44,15 +44,16 @@ LOGOUT_REDIRECT_URL = '/'
 
 INSTALLED_APPS = [
     'deck.apps.DeckConfig',
+    'quizmaker.apps.QuizmakerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'formtools',
     'social_django',
     'authentication',
-    'quizmaker',
 ]
 
 MIDDLEWARE = [
@@ -135,8 +136,6 @@ USE_TZ = True
 STATIC_ROOT = decouple_config('STATIC_ROOT')
 STATIC_URL = decouple_config('STATIC_URL')
 
-
-
 # LOGGING_LEVEL = decouple_config('LOGGING_LEVEL')
 # LOGGING_FILENAME = decouple_config('LOGGING_FILENAME')
 
@@ -159,3 +158,7 @@ STATIC_URL = decouple_config('STATIC_URL')
 #         },
 #     },
 # }
+
+
+# App constants
+QUIZNAME_MAX = 400
