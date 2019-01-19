@@ -3,8 +3,14 @@
 {% block content %}
 <h1>Adding Cards to quiz</h1>
 <h2>Quiz name: {{ quiz_name }}
-  Now, you can choose questions.  Below are recent ones, click on
-  any you want to be in your quiz.  You can also add cards by 
+  <UL id="quizmaker_instructions">
+	  <LI>Now, you can add cards to your quiz.</LI>
+  <LI>Some recenty added cards are below; select any you you want to be in your quiz. </LI>
+  <LI>Use the buttons to change the availale cards, based on tags, creator, etc.</LI>
+  <LI>Hit "update" button to add selected cards to your quiz</LI>
+  <LI>Hit done when you have all the questions you want, or just to save</LI>
+  <LI>The quiz won't be publically available until you hit "publish"</LI>
+</UL>
   <h3>Recent questions
     <div id='card_design_grid' >
       <div id='selectable_cardpool'>
@@ -15,10 +21,18 @@
 	</div>
 	{% endfor %}
       </div>
-      <div id="selection_changers">
-	<input type="button" id="choose_by_tag">Tags...</input>
-	<input type="button" id="choose_by_text">matching text...</input>
+      <div id="quizmaker_buttons">
+	<input type="button" value="Update Quiz" id="update_quiz_button">
+	<div id="selection_changers">
+	  <div id="question_pool_updaters">
+	    <input class="selection_change" type="button" value="Tags" id="choose_by_tag"></input>
+	    <input class="selection_change" type="button" value="Matching Text" id="choose_by_text"></input>
+	  </div>
+	</div>
       </div>
+    </div>
+    <div id="quiz_preview">
+      Current questions:
     </div>
 
 <br>
