@@ -1,39 +1,48 @@
 {% extends "quizmaker/base.html" %}
 
 {% block content %}
+<form action="{% url 'quizmaker:update_from_interactive_form' %}" method="post">
+  {% csrf_token %}
+
 <h1>Adding Cards to quiz</h1>
-<h2>Quiz name: {{ quiz_name }}
+<h2>Quiz name: {{ quiz_name }} </h2>
   <UL id="quizmaker_instructions">
 	  <LI>Now, you can add cards to your quiz.</LI>
   <LI>Some recenty added cards are below; select any you you want to be in your quiz. </LI>
   <LI>Use the buttons to change the availale cards, based on tags, creator, etc.</LI>
   <LI>Hit "update" button to add selected cards to your quiz</LI>
   <LI>Hit done when you have all the questions you want, or just to save</LI>
-  <LI>The quiz won't be publically available until you hit "publish"</LI>
+  <LI>The quiz won't be publicly available until you hit "publish" on later page</LI>
 </UL>
-  <h3>Recent questions
-    <div id='card_design_grid' >
-      <div id='selectable_cardpool'>
-	{% for card in cards %}
-	<div class="candidate_row">
-	  <label class="candidate" id="card{{card.id}}" for="checkbox{{card.id}}"> {{card.question_text}}  </label>
-	  <input id="checkbox{{card.id}}" type="checkbox" >
+  <h3>Recent questions</h3>
+      
+      <div id='card_design_grid' >
+	<div id='selectable_cardpool'>
+	  {% for card in cardpool %}
+	  <div class="candidate_row">
+	    <label class="candidate" id="card{{card.id}}" for="checkbox{{card.id}}"> {{card.question_text}}  </label>
+	    <input id="checkbox{{card.id}}" name="card_db_{{card.id}}" type="checkbox"/>
+	  </div>
+	  {% endfor %}
 	</div>
-	{% endfor %}
-      </div>
-      <div id="quizmaker_buttons">
-	<input type="button" value="Update Quiz" id="update_quiz_button">
-	<div id="selection_changers">
-	  <div id="question_pool_updaters">
+	<input type="hidden" name="quiz_id" value = "{{quiz_id}}" />
+	<div id="quizmaker_buttons">
+	  <input type="submit" value="Update Quiz" id="update_quiz_button" />
+    <div id="selection_changers">
+      <div id="question_pool_updaters">
 	    <input class="selection_change" type="button" value="Tags" id="choose_by_tag"></input>
 	    <input class="selection_change" type="button" value="Matching Text" id="choose_by_text"></input>
-	  </div>
-	</div>
       </div>
     </div>
+        </div>
+      </div>
+
+
+
     <div id="quiz_preview">
       Current questions:
-    </div>
+  </div>
 
-<br>
+
+        </form>
 {% endblock %}
